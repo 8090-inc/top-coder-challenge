@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Travel Reimbursement Calculator v3.0
-Based on cluster analysis with optimized linear models
+Travel Reimbursement Calculator v5.0
+Practical ensemble model combining rule engine with ML residual correction
 """
 
 import sys
@@ -12,11 +12,20 @@ import pandas as pd
 import numpy as np
 
 # Version tracking for our formula iterations
-FORMULA_VERSION = "v0.5_cluster_based"
+FORMULA_VERSION = "v5.0_practical_ensemble"
+
+# Try to import v4 model, fall back to v3 if not available
+try:
+    from models.v5_practical_ensemble import calculate_reimbursement_v5
+    USE_V5 = True
+    print("Using v5 practical ensemble model", file=sys.stderr)
+except Exception as e:
+    print(f"Warning: Could not load v5 model ({e}), using v3 inline implementation", file=sys.stderr)
+    USE_V5 = False
 
 def calculate_reimbursement(trip_days, miles, receipts):
     """
-    Calculate travel reimbursement based on v3 optimized cluster models.
+    Calculate travel reimbursement using the best available model.
     
     Args:
         trip_days: Number of days for the trip
@@ -26,6 +35,11 @@ def calculate_reimbursement(trip_days, miles, receipts):
     Returns:
         Calculated reimbursement amount
     """
+    # Use v4 if available
+    if USE_V5:
+        return calculate_reimbursement_v5(trip_days, miles, receipts)
+    
+    # Otherwise, use v3 inline implementation
     # Assign to cluster
     cluster = assign_cluster(trip_days, miles, receipts)
     
@@ -188,7 +202,8 @@ def apply_receipt_ending_penalty(amount, receipts):
 def process_single(trip_days, miles, receipts):
     """Process a single reimbursement calculation"""
     result = calculate_reimbursement(trip_days, miles, receipts)
-    print(f"Formula Version: v3.0_optimized")
+    version = "v5.0_practical_ensemble" if USE_V5 else "v3.0_optimized"
+    print(f"Formula Version: {version}")
     print(f"Inputs: {trip_days} days, {miles} miles, ${receipts:.2f} receipts")
     print(f"Expected Reimbursement: ${result:.2f}")
     return result
@@ -196,7 +211,8 @@ def process_single(trip_days, miles, receipts):
 def process_json_file(filepath):
     """Process all cases in a JSON file"""
     print(f"Processing file: {filepath}")
-    print(f"Formula Version: v3.0_optimized")
+    version = "v5.0_practical_ensemble" if USE_V5 else "v3.0_optimized"
+    print(f"Formula Version: {version}")
     print("-" * 60)
     
     # Load JSON data
@@ -245,7 +261,8 @@ def process_json_file(filepath):
         print(best.to_string(index=False))
         
         # Save full results
-        output_file = filepath.replace('.json', '_predictions_v3.csv')
+        version_suffix = 'v5' if USE_V5 else 'v3'
+        output_file = filepath.replace('.json', f'_predictions_{version_suffix}.csv')
         df.to_csv(output_file, index=False)
         print(f"\nFull results saved to: {output_file}")
         
@@ -263,7 +280,8 @@ def process_json_file(filepath):
         print(f"Average predicted reimbursement: ${df['predicted_reimbursement'].mean():.2f}")
         
         # Save results
-        output_file = filepath.replace('.json', '_predictions_v3.csv')
+        version_suffix = 'v5' if USE_V5 else 'v3'
+        output_file = filepath.replace('.json', f'_predictions_{version_suffix}.csv')
         df.to_csv(output_file, index=False)
         print(f"\nPredictions saved to: {output_file}")
     
@@ -272,7 +290,7 @@ def process_json_file(filepath):
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description='Calculate travel reimbursements using the v3.0 optimized formula',
+        description='Calculate travel reimbursements using the v5.0 practical ensemble model',
         epilog='Examples:\n'
                '  %(prog)s 5 300 750.50\n'
                '  %(prog)s data/raw/public_cases.json\n',

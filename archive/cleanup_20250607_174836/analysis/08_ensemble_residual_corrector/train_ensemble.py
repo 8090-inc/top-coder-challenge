@@ -20,14 +20,14 @@ warnings.filterwarnings('ignore')
 
 # Load data
 print("Loading data...")
-train_df = pd.read_csv('../../data/train.csv')
-test_df = pd.read_csv('../../data/test.csv')
+train_df = pd.read_csv('data/train.csv')
+test_df = pd.read_csv('data/test.csv')
 
 # Load v3 model
 print("Loading v3 rule engine...")
 import sys
-sys.path.append('../..')
-from src.v3_optimized_clusters import predict_reimbursement
+sys.path.append('.')
+from models.cluster_models_optimized import calculate_reimbursement_v3 as predict_reimbursement
 
 # Generate base predictions from rule engine
 print("Generating rule engine predictions...")
@@ -272,7 +272,7 @@ print(f"90th percentile: ${np.percentile(errors, 90):.2f}")
 # Save models
 print("\nSaving models...")
 for name, model in trained_models.items():
-    joblib.dump(model, f'{name.lower()}_residual_model.pkl')
+    joblib.dump(model, f'analysis/08_ensemble_residual_corrector/{name.lower()}_residual_model.pkl')
 
 # Generate test predictions
 print("\nGenerating test predictions...")
@@ -301,8 +301,8 @@ output_df = pd.DataFrame({
     'final_prediction': test_predictions
 })
 
-output_df.to_csv('ensemble_test_predictions.csv', index=False)
-print(f"\nTest predictions saved to ensemble_test_predictions.csv")
+output_df.to_csv('analysis/08_ensemble_residual_corrector/ensemble_test_predictions.csv', index=False)
+print(f"\nTest predictions saved to analysis/08_ensemble_residual_corrector/ensemble_test_predictions.csv")
 
 # Analyze corrections by cluster
 print("\nAnalyzing corrections by cluster...")

@@ -4,6 +4,52 @@ Optimized cluster-specific models for reimbursement calculation
 These models are based on linear regression fits to the actual data.
 """
 
+def assign_cluster(trip_days, miles, receipts):
+    """
+    Assign a trip to the appropriate cluster (returns integer ID).
+    
+    This is a simplified version that returns integer cluster IDs for ML compatibility.
+    Maps the string cluster IDs from assign_cluster_v2 to integers.
+    """
+    # Special case: 1-day trips with < 600 miles (Cluster 6)
+    if trip_days == 1 and miles < 600:
+        return 6
+    
+    # Check for special profile first (Cluster 5)
+    if 7 <= trip_days <= 8 and 900 <= miles <= 1200 and 1000 <= receipts <= 1200:
+        return 5
+    
+    # Cluster 4: Outlier (very low receipts)
+    if receipts < 10:
+        return 4
+    
+    # Special outlier case: 4-day, very low miles, very high receipts
+    if trip_days == 4 and miles < 100 and receipts > 2000:
+        return 7  # Map '0_low_mile_high_receipt' to 7
+    
+    # Cluster 3: Short trip (3-5 days) with very high expenses
+    if 3 <= trip_days <= 5 and receipts > 1700:
+        return 3
+    
+    # Cluster 1: Single day high miles
+    if trip_days == 1 and miles >= 600:
+        if receipts > 1500:
+            return 8  # Map '1a' to 8
+        else:
+            return 9  # Map '1b' to 9
+    
+    # Cluster 2: Long trip (10+ days) with high receipts
+    if trip_days >= 10 and receipts > 1300:
+        return 2
+    
+    # Cluster 5: Medium trip (5-8 days) with high miles
+    if 5 <= trip_days <= 8 and miles > 800:
+        return 5
+    
+    # Default to Cluster 0: Standard multi-day
+    return 0
+
+
 def calculate_cluster_0_optimized(trip_days, miles, receipts):
     """Standard Multi-Day Trip - fitted linear model with receipt cap"""
     # Special case for case 86 pattern (9 days, ~400 miles, ~$350 receipts ending in .49)
@@ -21,14 +67,16 @@ def calculate_cluster_0_low_mile_high_receipt_optimized(trip_days, miles, receip
     # Special case for the one outlier
     if trip_days == 4 and miles == 69 and receipts > 2300:
         return 322.00
-    # Otherwise use average from the 3 cases
-    return 1042.54
+    # Better formula for high-receipt outliers
+    # Base amount plus small receipt contribution
+    return 800.0 + 0.25 * receipts
 
 
 def calculate_cluster_1a_optimized(trip_days, miles, receipts):
     """Single Day High Miles + High Receipts - fitted model"""
-    # Note: negative coefficient on miles!
-    return 1425.89 + 0.00 * trip_days + -0.286 * miles + 0.102 * receipts
+    # Cap miles at 950 to handle negative coefficient pattern
+    capped_miles = min(miles, 950)
+    return 1425.89 + 0.00 * trip_days + -0.286 * capped_miles + 0.102 * receipts
 
 
 def calculate_cluster_1b_optimized(trip_days, miles, receipts):
@@ -38,8 +86,9 @@ def calculate_cluster_1b_optimized(trip_days, miles, receipts):
 
 def calculate_cluster_2_optimized(trip_days, miles, receipts):
     """Long Trip (10+ days) with High Receipts - fitted model"""
-    # Note: negative coefficient on receipts!
-    return 1333.22 + 46.57 * trip_days + 0.286 * miles + -0.128 * receipts
+    # Cap receipts at 1800 to handle negative coefficient pattern
+    capped_receipts = min(receipts, 1800)
+    return 1333.22 + 46.57 * trip_days + 0.286 * miles + -0.128 * capped_receipts
 
 
 def calculate_cluster_3_optimized(trip_days, miles, receipts):
