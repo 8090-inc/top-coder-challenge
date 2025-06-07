@@ -87,4 +87,38 @@ When you're ready to submit:
 
 ---
 
-**Good luck and Bon Voyage!**
+## Approaches to solve this code challenge
+
+The repository contains a coding challenge to reproduce the behavior of ACME Corp’s legacy travel reimbursement system. The README explains that you must reverse‑engineer the original logic from 1,000 historical cases and employee interviews, ultimately implementing a run.sh script that outputs a single reimbursement amount when given trip duration, miles traveled, and receipt total.
+
+The PRD emphasizes that the legacy system is a “black box” with unpredictable behaviors that must be replicated exactly, even if they stem from quirks or bugs. Employee interviews describe suspected patterns: bonuses for 5‑day trips with around 180–220 miles per day, penalties for long high‑spending trips, and other non‑linear effects.
+
+Observations from the Public Data:
+The dataset contains 1,000 cases with trip_duration_days (1–14), miles_traveled (mostly integer, some decimals), and total_receipts_amount (floating point).
+Simple correlations show that reimbursement per day is strongly correlated with receipts per day (~0.93) and also correlated with miles per day (~0.80).
+Average reimbursement rises with trip length but has dips (e.g., a drop around 8 days), suggesting thresholds or penalties rather than a single linear formula.
+
+Plausible Approaches in Python
+
+1. Rule‑Based Modeling
+Analyze the data and interview hints to infer per‑day allowances, mileage bands, and receipt caps.
+Implement piecewise logic:
+Base reimbursement per day (different rates for 1–4, 5–7, etc.).
+Mileage multipliers that drop off after certain thresholds (e.g., after ~200 miles/day).
+Receipt reimbursement with diminishing returns and special bonuses/penalties (e.g., the “sweet spot combo” for 5‑day trips under $100/day).
+This yields a deterministic script that captures known quirks and is easy to explain.
+This approach matches the interviews’ emphasis on specific thresholds and “sweet spots,” and it keeps the implementation lightweight (no external ML dependencies), satisfying the requirement that run.sh should run quickly and without extra packages.
+
+2. Machine Learning Approximation
+Treat the inputs as features and train a regression model (e.g., RandomForest or GradientBoosting) using the 1,000 public cases.
+Include engineered features such as miles_per_day, receipts_per_day, interaction terms, and polynomial expansions.
+Measure error using the provided eval.sh script; iterate until the model predicts within a small average error.
+For reproducibility, the trained model’s parameters can be exported to a small Python script (e.g., using sklearn’s model serialization or embedding the decision tree rules directly). This can closely match the legacy outputs without manually deriving every rule.
+Both approaches make sense because the interviews strongly suggest complex, non‑linear behavior with bonuses, penalties, and diminishing returns. Rule‑based logic provides transparency and might mimic intentional business rules, while an ML model can capture subtle patterns that are difficult to deduce manually. The best solution may combine both—start with interpretable rules informed by the interviews, then use machine learning to fine‑tune or account for residual patterns.
+
+Either way, the core steps remain:
+1. Explore public_cases.json to identify relationships among days, miles, and receipts.
+2. Build a Python implementation that computes the reimbursement using those insights.
+3. Test against all cases via ./eval.sh and iterate until the score is sufficiently low.
+
+This approach fulfills the challenge of replicating the legacy system’s outputs while adhering to the repository’s guidelines.
