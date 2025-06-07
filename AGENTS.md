@@ -100,7 +100,7 @@ Average reimbursement rises with trip length but has dips (e.g., a drop around 8
 
 Plausible Approaches in Python
 
-1. Rule‑Based Modeling
+1. Rule‑Based Modeling: 
 Analyze the data and interview hints to infer per‑day allowances, mileage bands, and receipt caps.
 Implement piecewise logic:
 Base reimbursement per day (different rates for 1–4, 5–7, etc.).
@@ -109,7 +109,7 @@ Receipt reimbursement with diminishing returns and special bonuses/penalties (e.
 This yields a deterministic script that captures known quirks and is easy to explain.
 This approach matches the interviews’ emphasis on specific thresholds and “sweet spots,” and it keeps the implementation lightweight (no external ML dependencies), satisfying the requirement that run.sh should run quickly and without extra packages.
 
-2. Machine Learning Approximation
+2. Machine Learning Approximation: 
 Treat the inputs as features and train a regression model (e.g., RandomForest or GradientBoosting) using the 1,000 public cases.
 Include engineered features such as miles_per_day, receipts_per_day, interaction terms, and polynomial expansions.
 Measure error using the provided eval.sh script; iterate until the model predicts within a small average error.
