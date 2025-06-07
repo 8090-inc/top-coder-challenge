@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# run.sh - Hybrid approach combining best segmentation with ML insights.
+
 # Check if the correct number of arguments is provided
 if [ "$#" -ne 3 ]; then
     echo "Usage: ./run.sh <trip_duration_days> <miles_traveled> <total_receipts_amount>"
@@ -13,24 +15,32 @@ total_receipts_amount=$3
 # Variable to store the final calculation string for bc
 formula_string=""
 
-# Determine which formula to use based on total_receipts_amount
 # Using bc for robust floating point comparisons. bc returns 1 for true, 0 for false.
+# Define ML-refined boundary for high receipts
+ML_HIGH_RECEIPT_BOUNDARY="828" # Approximately sqrt(685741.84)
 
-# Low Receipts (total_receipts_amount <= 200)
+# Segment 1: Low Receipts (total_receipts_amount <= 200)
 condition_low_receipts=$(echo "$total_receipts_amount <= 200" | bc -l)
 
-# Medium Receipts (200 < total_receipts_amount <= 1000)
-condition_medium_receipts=$(echo "$total_receipts_amount > 200 && $total_receipts_amount <= 1000" | bc -l)
+# Segment 2: Medium Receipts (200 < total_receipts_amount <= ML_HIGH_RECEIPT_BOUNDARY)
+condition_medium_receipts=$(echo "$total_receipts_amount > 200 && $total_receipts_amount <= $ML_HIGH_RECEIPT_BOUNDARY" | bc -l)
+
+# Segment 3: High Receipts (total_receipts_amount > ML_HIGH_RECEIPT_BOUNDARY)
+# This condition is met if the others are false.
 
 if [ "$condition_low_receipts" -eq 1 ]; then
-    # Low Receipts (<= $200)
+    # Formula from best manual segmentation for low receipts
+    # E_Out = 113.74 + (0.09 * R) + (57.92 * D) + (0.50 * M)
     formula_string="113.74 + (0.09 * $total_receipts_amount) + (57.92 * $trip_duration_days) + (0.50 * $miles_traveled)"
 elif [ "$condition_medium_receipts" -eq 1 ]; then
-    # Medium Receipts ($201-$1000)
+    # Formula from best manual segmentation for medium receipts (boundary adjusted by ML)
+    # E_Out = -152.84 + (0.87 * R) + (55.77 * D) + (0.53 * M)
     formula_string="-152.84 + (0.87 * $total_receipts_amount) + (55.77 * $trip_duration_days) + (0.53 * $miles_traveled)"
 else
-    # High Receipts (> $1000) - Receipts have 0.00 coefficient (effectively ignored)
-    formula_string="1089.01 + (0.00 * $total_receipts_amount) + (42.04 * $trip_duration_days) + (0.37 * $miles_traveled)"
+    # Formula for High Receipts (> ML_HIGH_RECEIPT_BOUNDARY), incorporating ML insight of negative/penalizing coefficient for receipts
+    # From quick_high_receipt_analysis.py for "Specific Worst High-Receipt Error Cases":
+    # E_Out = 260.17 + (-0.05*R) + (39.22*D) + (0.21*M)
+    formula_string="260.17 + (-0.05 * $total_receipts_amount) + (39.22 * $trip_duration_days) + (0.21 * $miles_traveled)"
 fi
 
 # Perform the calculation using bc with a scale for precision
