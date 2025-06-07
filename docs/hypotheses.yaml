@@ -1,0 +1,181 @@
+hypotheses:
+  - id: H1
+    source: "Marcus from Sales"
+    description: "The system is more generous at certain times of the month (e.g., early March vs late March)."
+    category: "Time-based"
+    verified_by_data: "Pending"
+    notes: "Marcus observed different reimbursements for identical trips at different times of the month."
+  - id: H2
+    source: "Marcus from Sales"
+    description: "Longer trips (e.g., 8 days) with high mileage and many cities visited can result in unexpectedly high reimbursements."
+    category: "Trip Duration/Effort"
+    verified_by_data: "Pending"
+    notes: "Contrasts with Janet's 7-day conference with low reimbursement. Marcus suggests the system might reward 'hustle'."
+  - id: H3
+    source: "Marcus from Sales"
+    description: "Mileage reimbursement rate is not linear and might drop off for longer drives, but not consistently (e.g. 600-mile trip got less than expected, but an 800-mile trip might get more per mile)."
+    category: "Mileage-based"
+    verified_by_data: "Pending"
+    notes: "Standard rate for short drives, but complex for longer ones. Potential distance bonuses or other factors."
+  - id: H4
+    source: "Marcus from Sales"
+    description: "There might be a cap or penalty for spending too much on receipts, but the threshold is unknown and might vary by person or department."
+    category: "Receipt-based"
+    verified_by_data: "Pending"
+    notes: "$2000 expense weeks got less than $1200 weeks. Daily spending rates also don't show a clear pattern ($60/day better than $90/day once)."
+  - id: H5
+    source: "Marcus from Sales"
+    description: "The system is more generous at the end of Q4."
+    category: "Time-based"
+    verified_by_data: "Pending"
+    notes: "Observed three years running for sales trips. Tom from HR doesn't see this for candidate travel."
+  - id: H6
+    source: "Marcus from Sales"
+    description: "The system might remember a user's history, becoming stingier with frequent large expense reports and more generous after a period of modest submissions."
+    category: "Quirks"
+    verified_by_data: "Pending"
+    notes: "Marcus started spacing out big trips based on this theory."
+  - id: H7
+    source: "Marcus from Sales"
+    description: "Certain receipt totals (e.g., $847) are considered 'lucky' and always get good reimbursements."
+    category: "Quirks"
+    verified_by_data: "Pending"
+    notes: "Anecdotal, likely superstition."
+  - id: H8
+    source: "Marcus from Sales"
+    description: "An 'efficiency bonus' might exist for covering lots of ground in a short time."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "Marcus thinks this might be true."
+  - id: H9
+    source: "Marcus from Sales"
+    description: "If receipts end in certain cents amounts (e.g. .49, .99), the system might round up calculations in the user's favor."
+    category: "Quirks" # Could also be Receipt-based
+    verified_by_data: "Pending"
+    notes: "Marcus never tested this; Lisa from Accounting mentions this too."
+  - id: H10
+    source: "Lisa from Accounting"
+    description: "A standard daily per diem rate (around $100) exists, but with unexplained adjustments."
+    category: "Trip Duration" # Or Per Diem
+    verified_by_data: "Pending"
+    notes: "Base rate seems to be $100/day."
+  - id: H11
+    source: "Lisa from Accounting"
+    description: "5-day trips consistently receive a bonus, while 4-day or 6-day trips get normal rates."
+    category: "Trip Duration"
+    verified_by_data: "Pending"
+    notes: "One exception noted for a 5-day trip not getting the bonus."
+  - id: H12
+    source: "Lisa from Accounting"
+    description: "Mileage calculation is tiered: full rate for the first ~100 miles, then it drops along a non-linear curve."
+    category: "Mileage-based"
+    verified_by_data: "Pending"
+    notes: "Curve is not simple percentage or logarithmic. Modest expenses on long trips might yield better mileage reimbursement."
+  - id: H13
+    source: "Lisa from Accounting"
+    description: "Receipt reimbursement has diminishing returns; medium-high amounts ($600-800) get good treatment, while very high amounts get less per dollar. Very low amounts are penalized."
+    category: "Receipt-based"
+    verified_by_data: "Pending"
+    notes: "Submitting $50 for a multi-day trip can be worse than submitting nothing. $30 got decent, $80 got penalties. Trip length/mileage might affect penalties."
+  - id: H14
+    source: "Lisa from Accounting"
+    description: "The system has different calculation paths for different trip types (e.g., quick high-mileage vs. long low-mileage)."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "Efficiency bonus (miles/day) is real but complex, not a simple ratio."
+  - id: H15
+    source: "Lisa from Accounting"
+    description: "Receipts ending in .49 or .99 cents often result in slightly higher reimbursement, possibly due to double rounding."
+    category: "Receipt-based" # Or Quirks
+    verified_by_data: "Pending"
+    notes: "Happening for years, could be a feature. Lisa times purchases to hit these."
+  - id: H16
+    source: "Lisa from Accounting"
+    description: "Small, consistent variations (5-10%) exist for similar trips by the same person, possibly due to seasonality, randomization, or other unknown factors."
+    category: "General observations"
+    verified_by_data: "Pending"
+    notes: "Variation patterns don't look completely random."
+  - id: H17
+    source: "Dave from Marketing"
+    description: "The system might have different rates for different cities/locations."
+    category: "Quirks" # Or Location-based if that category is added
+    verified_by_data: "Pending"
+    notes: "Austin trip got good reimbursement, Phoenix (similar trip) was worse."
+  - id: H18
+    source: "Dave from Marketing"
+    description: "Submitting tiny receipt amounts (e.g., $12) can result in a reimbursement less than the base per diem."
+    category: "Receipt-based"
+    verified_by_data: "Pending"
+    notes: "Better to leave off small receipts."
+  - id: H19
+    source: "Dave from Marketing"
+    description: "A 'magic combination' of days, miles, and spending might trigger a jackpot reimbursement."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "Sarah from Ops's theory."
+  - id: H20
+    source: "Jennifer from HR"
+    description: "New employees tend to get lower reimbursements, possibly due to unfamiliarity with optimal practices."
+    category: "Quirks" # Or User-based
+    verified_by_data: "Pending"
+    notes: "Long-term employees seem to do better."
+  - id: H21
+    source: "Jennifer from HR"
+    description: "There's a sweet spot for trip duration around 4-6 days for particularly good reimbursements."
+    category: "Trip Duration"
+    verified_by_data: "Pending"
+    notes: "Shorter or longer trips often lead to disappointment."
+  - id: H22
+    source: "Jennifer from HR"
+    description: "Sales department seems to get better reimbursements overall, possibly due to more travel and system understanding."
+    category: "Quirks" # Or Department-based
+    verified_by_data: "Pending"
+    notes: "Finance/Accounting are conservative and happy. Operations gets mixed results."
+  - id: H23
+    source: "Kevin from Procurement"
+    description: "Efficiency (miles/day) is crucial, with a sweet spot around 180-220 miles/day for maximized bonuses. Too low or too high reduces bonuses."
+    category: "Mileage-based"
+    verified_by_data: "Pending"
+    notes: "System might think driving 400 miles/day isn't actual business."
+  - id: H24
+    source: "Kevin from Procurement"
+    description: "Optimal daily spending ranges depend on trip length: <$75/day for short trips, up to $120/day for 4-6 day trips, <$90/day for long trips to avoid penalties."
+    category: "Receipt-based"
+    verified_by_data: "Pending"
+    notes: "Based on extensive trial and error."
+  - id: H25
+    source: "Kevin from Procurement"
+    description: "Submission timing matters: Tuesday/Thursday are good, Friday is bad. New moon submissions average 4% higher than full moon."
+    category: "Time-based"
+    verified_by_data: "Pending"
+    notes: "Based on tracking 247 submissions and lunar cycle correlation analysis."
+  - id: H26
+    source: "Kevin from Procurement"
+    description: "There are at least six different calculation paths based on trip characteristics (e.g., quick high-mileage, long low-mileage, medium balanced)."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "Identified through k-means clustering on personal data."
+  - id: H27
+    source: "Kevin from Procurement"
+    description: "Interaction effects between factors (e.g., trip length * efficiency, spending/day * total mileage) and threshold effects are key to reimbursement calculation."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "System has hidden decision trees."
+  - id: H28
+    source: "Kevin from Procurement"
+    description: "Specific combinations trigger bonuses/penalties: 5-day trips with 180+ mi/day & <$100/day = 'sweet spot combo' (bonus). 8+ day trips with high spending = 'vacation penalty'."
+    category: "Combinations"
+    verified_by_data: "Pending"
+    notes: "High mileage + low spending = good. Low mileage + high spending = bad."
+  - id: H29
+    source: "Kevin from Procurement"
+    description: "The system might have a learning/adaptation component, building user profiles or evolving rules over time."
+    category: "Quirks"
+    verified_by_data: "Pending"
+    notes: "Early trips treated differently than recent ones, controlling for known factors."
+  - id: H30
+    source: "Marcus from Sales" # Also Kevin from Procurement
+    description: "Submitting on Tuesdays might be better."
+    category: "Time-based"
+    verified_by_data: "Pending"
+    notes: "Kevin from procurement swears by submitting on Tuesdays, has data."
