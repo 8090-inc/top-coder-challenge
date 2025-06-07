@@ -1,0 +1,11 @@
+TRAVEL REIMBURSEMENT SYSTEM ANALYSIS SUMMARY
+==================================================
+
+Key Observations:
+- Strong correlation with miles traveled: 0.432
+- Moderate correlation with trip days: 0.514
+- Weak correlation with receipts: 0.704
+
+- Average reimbursement: $1349.11
+- Median reimbursement: $1454.26
+- Range: $117.24 - $2337.73

@@ -1,4 +1,72 @@
-# Top Coder Challenge: Black Box Legacy Reimbursement System
+# Legacy Reimbursement System Reverse Engineering
+
+This project aims to reverse-engineer ACME Corp's legacy travel reimbursement system by analyzing historical data and employee interviews.
+
+## Project Structure
+
+```
+.
+├── analysis/              # Analysis code and notebooks
+│   ├── scripts/          # Python analysis scripts
+│   │   ├── explore_reimbursement_logic.py    # Initial exploration
+│   │   └── analyze_initial_findings.py       # Hypothesis comparison
+│   └── notebooks/        # Jupyter notebooks for interactive analysis
+│       └── explore_reimbursement.ipynb
+│
+├── data/                 # Data files
+│   ├── raw/             # Original data files
+│   │   ├── public_cases.json   # 1,000 cases with known outputs
+│   │   └── private_cases.json  # 5,000 cases for final testing
+│   └── processed/       # Cleaned/transformed data
+│
+├── results/             # Analysis outputs
+│   ├── figures/         # Visualizations and plots
+│   │   └── reimbursement_analysis.png
+│   ├── reports/         # Analysis reports and findings
+│   │   ├── potential_bugs_or_special_cases.csv
+│   │   └── analysis_summary.txt
+│   └── models/          # Saved models and formulas
+│
+├── docs/                # Documentation
+│   ├── PRD.md          # Product Requirements Document
+│   ├── INTERVIEWS.md   # Employee interview transcripts
+│   └── hypothesis.txt  # Working hypotheses (living document)
+│
+├── tests/              # Test scripts for the final model
+└── requirements.txt    # Python dependencies
+```
+
+## Current Status
+
+### Key Findings
+1. **Receipts are the dominant factor** (0.70 correlation), not miles as employees believed
+2. **No clear 5-day bonus** despite strong interview claims
+3. **Large base intercept** ($915) suggests minimum reimbursement
+4. **Low receipt penalty** confirmed (<$50 receipts severely penalized)
+
+### Next Steps
+1. Deep dive on receipt processing rules
+2. Investigate base amount/minimum
+3. Analyze outliers for special rules
+4. Test for multiple calculation paths
+
+## Running the Analysis
+
+```bash
+# Activate virtual environment
+source .venv/bin/activate
+
+# Run initial exploration
+python analysis/scripts/explore_reimbursement_logic.py
+
+# Compare findings to hypotheses
+python analysis/scripts/analyze_initial_findings.py
+```
+
+## Key Documents
+- `docs/hypothesis.txt` - Living document tracking all hypotheses and test results
+- `docs/INTERVIEWS.md` - Employee insights about the system
+- `docs/PRD.md` - Business requirements and success criteria
 
 **Reverse-engineer a 60-year-old travel reimbursement system using only historical data and employee interviews.**
 
