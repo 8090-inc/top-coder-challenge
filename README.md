@@ -1,158 +1,82 @@
-# Legacy Reimbursement System Reverse Engineering
+# Legacy Reimbursement Calculator - Reverse Engineering Project
 
-This project aims to reverse-engineer ACME Corp's legacy travel reimbursement system by analyzing historical data and employee interviews.
+## Project Overview
+This project reverse-engineers a legacy travel reimbursement calculation system. Through analysis of 1,000 public test cases, we discovered 6 distinct calculation paths (clusters) that determine reimbursement amounts based on trip days, miles traveled, and receipt totals.
 
-## Project Structure
+## Key Findings
+- **6 Calculation Paths**: Each cluster represents a different type of business trip
+- **Special Profile**: 7 cases with specific criteria (7-8 days, 900-1200 miles, 1000-1200 receipts) that follow a unique calculation
+- **Current Best Model**: v0.5 achieves MAE of $160.05 (improvement from v0.4's $167.40)
+
+## Directory Structure
 
 ```
 .
-├── analysis/              # Analysis code and notebooks
-│   ├── scripts/          # Python analysis scripts
-│   │   ├── explore_reimbursement_logic.py    # Initial exploration
-│   │   └── analyze_initial_findings.py       # Hypothesis comparison
-│   └── notebooks/        # Jupyter notebooks for interactive analysis
-│       └── explore_reimbursement.ipynb
+├── calculate_reimbursement.py    # Main calculator with all model versions
+├── config.py                     # Project configuration
 │
-├── data/                 # Data files
-│   ├── raw/             # Original data files
-│   │   ├── public_cases.json   # 1,000 cases with known outputs
-│   │   └── private_cases.json  # 5,000 cases for final testing
-│   └── processed/       # Cleaned/transformed data
+├── data/
+│   ├── raw/                      # Original data files
+│   │   ├── public_cases.json
+│   │   └── private_cases.json
+│   ├── processed/                # Processed datasets
+│   │   └── public_cases_with_clusters.csv
+│   └── predictions/              # Model predictions
 │
-├── results/             # Analysis outputs
-│   ├── figures/         # Visualizations and plots
-│   │   └── reimbursement_analysis.png
-│   ├── reports/         # Analysis reports and findings
-│   │   ├── potential_bugs_or_special_cases.csv
-│   │   └── analysis_summary.txt
-│   └── models/          # Saved models and formulas
+├── models/
+│   └── v0.5_cluster_based/       # Current best model
+│       ├── cluster_model_params.json
+│       └── decision_tree_*.pkl
 │
-├── docs/                # Documentation
-│   ├── PRD.md          # Product Requirements Document
-│   ├── INTERVIEWS.md   # Employee interview transcripts
-│   └── hypothesis.txt  # Working hypotheses (living document)
+├── analysis/                     # Analysis scripts (organized by phase)
+│   ├── 01_initial_exploration/   # (archived)
+│   ├── 02_clustering_discovery/  # Finding 6 clusters
+│   ├── 03_cluster_analysis/      # Deep dive into each cluster
+│   ├── 04_model_development/     # Building cluster-specific models
+│   └── 05_final_implementation/  # v0.5 implementation
 │
-├── tests/              # Test scripts for the final model
-└── requirements.txt    # Python dependencies
+├── results/
+│   ├── figures/                  # Visualizations
+│   └── reports/                  # Analysis reports
+│
+└── archive/                      # Old explorations and iterations
+    ├── initial_explorations/
+    └── model_iterations/
 ```
 
-## Current Status
+## Model Versions
 
-### Key Findings
-1. **Receipts are the dominant factor** (0.70 correlation), not miles as employees believed
-2. **No clear 5-day bonus** despite strong interview claims
-3. **Large base intercept** ($915) suggests minimum reimbursement
-4. **Low receipt penalty** confirmed (<$50 receipts severely penalized)
+- **v0.1**: Baseline linear regression (MAE: $189)
+- **v0.2**: Inverted receipt coverage model (MAE: $385)
+- **v0.3**: Hybrid approach (MAE: $227)
+- **v0.4**: Refined with special case handling (MAE: $167)
+- **v0.5**: Cluster-based approach (MAE: $160) ⭐ Current best
 
-### Next Steps
-1. Deep dive on receipt processing rules
-2. Investigate base amount/minimum
-3. Analyze outliers for special rules
-4. Test for multiple calculation paths
-
-## Running the Analysis
+## Usage
 
 ```bash
-# Activate virtual environment
-source .venv/bin/activate
+# Single calculation (uses v0.5 by default)
+python calculate_reimbursement.py 7 1000 1100
 
-# Run initial exploration
-python analysis/scripts/explore_reimbursement_logic.py
+# Process JSON file
+python calculate_reimbursement.py data/raw/public_cases.json
 
-# Compare findings to hypotheses
-python analysis/scripts/analyze_initial_findings.py
+# Use specific version
+python calculate_reimbursement.py --version v0.4 5 300 750.50
 ```
 
-## Key Documents
-- `docs/hypothesis.txt` - Living document tracking all hypotheses and test results
-- `docs/INTERVIEWS.md` - Employee insights about the system
-- `docs/PRD.md` - Business requirements and success criteria
+## The 6 Clusters
 
-**Reverse-engineer a 60-year-old travel reimbursement system using only historical data and employee interviews.**
+1. **Standard Multi-Day** (27.6%): 5-12 day trips, low miles, medium receipts
+2. **Single Day High Miles** (5.0%): 1-day trips with high mileage (possibly air travel)
+3. **Long Trip High Receipts** (29.4%): 10-12 day extended trips
+4. **Short Trip** (17.2%): 3-5 day business trips with high daily expenses
+5. **Outlier** (0.1%): Single case with very low receipts
+6. **Medium Trip High Miles** (20.7%): Contains the special profile cases
 
-ACME Corp's legacy reimbursement system has been running for 60 years. No one knows how it works, but it's still used daily.
+## Next Steps
 
-8090 has built them a new system, but ACME Corp is confused by the differences in results. Your mission is to figure out the original business logic so we can explain why ours is different and better.
-
-Your job: create a perfect replica of the legacy system by reverse-engineering its behavior from 1,000 historical input/output examples and employee interviews.
-
-## What You Have
-
-### Input Parameters
-
-The system takes three inputs:
-
-- `trip_duration_days` - Number of days spent traveling (integer)
-- `miles_traveled` - Total miles traveled (integer)
-- `total_receipts_amount` - Total dollar amount of receipts (float)
-
-## Documentation
-
-- A PRD (Product Requirements Document)
-- Employee interviews with system hints
-
-### Output
-
-- Single numeric reimbursement amount (float, rounded to 2 decimal places)
-
-### Historical Data
-
-- `public_cases.json` - 1,000 historical input/output examples
-
-## Getting Started
-
-1. **Analyze the data**: 
-   - Look at `public_cases.json` to understand patterns
-   - Look at `PRD.md` to understand the business problem
-   - Look at `INTERVIEWS.md` to understand the business logic
-2. **Create your implementation**:
-   - Copy `run.sh.template` to `run.sh`
-   - Implement your calculation logic
-   - Make sure it outputs just the reimbursement amount
-3. **Test your solution**: 
-   - Run `./eval.sh` to see how you're doing
-   - Use the feedback to improve your algorithm
-4. **Submit**:
-   - Run `./generate_results.sh` to get your final results.
-   - Add `arjun-krishna1` to your repo.
-   - Complete [the submission form](https://forms.gle/sKFBV2sFo2ADMcRt8).
-
-## Implementation Requirements
-
-Your `run.sh` script must:
-
-- Take exactly 3 parameters: `trip_duration_days`, `miles_traveled`, `total_receipts_amount`
-- Output a single number (the reimbursement amount)
-- Run in under 5 seconds per test case
-- Work without external dependencies (no network calls, databases, etc.)
-
-Example:
-
-```bash
-./run.sh 5 250 150.75
-# Should output something like: 487.25
-```
-
-## Evaluation
-
-Run `./eval.sh` to test your solution against all 1,000 cases. The script will show:
-
-- **Exact matches**: Cases within ±$0.01 of the expected output
-- **Close matches**: Cases within ±$1.00 of the expected output
-- **Average error**: Mean absolute difference from expected outputs
-- **Score**: Lower is better (combines accuracy and precision)
-
-Your submission will be tested against `private_cases.json` which does not include the outputs.
-
-## Submission
-
-When you're ready to submit:
-
-1. Push your solution to a GitHub repository
-2. Add `arjun-krishna1` to your repository
-3. Submit via the [submission form](https://forms.gle/sKFBV2sFo2ADMcRt8).
-4. When you submit the form you will submit your `private_results.txt` which will be used for your final score.
-
----
-
-**Good luck and Bon Voyage!**
+1. Implement full decision tree logic (currently using simplified rules)
+2. Fine-tune cluster-specific models
+3. Handle edge cases at cluster boundaries
+4. Test on private dataset

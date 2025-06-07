@@ -1,0 +1,7 @@
+cluster_id,name,size,percentage,mae,formula_type,contains_special
+0,Standard Multi-Day (5-12 days),276,27.6%,102.21,fixed,False
+1,Single Day High Miles,50,5.0%,71.68,decision_tree,False
+2,Long Trip High Receipts,294,29.4%,101.28,decision_tree,False
+3,Short Trip (3-5 days),172,17.2%,88.65,decision_tree,False
+4,Outlier (Low Receipt),1,0.1%,0.0,fixed,False
+5,Medium Trip High Miles (CONTAINS SPECIAL PROFILE),207,20.7%,118.54,decision_tree,True
