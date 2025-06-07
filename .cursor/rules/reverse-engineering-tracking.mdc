@@ -1,0 +1,45 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Reverse Engineering Tracking Rule
+
+## Always Keep Algorithm Understanding Current
+
+When working on reverse engineering tasks, **ALWAYS** maintain and update the [reverse_engineering_log.md](mdc:reverse_engineering_log.md) file with:
+
+### 1. Current Algorithm Understanding
+- **Pseudocode representation** of the current best understanding
+- **Component breakdown** (base rates, mileage calculations, receipt processing, etc.)
+- **Edge cases and special logic** discovered through analysis
+
+### 2. Iteration History
+- **What was tried** in each iteration with specific parameters
+- **Results achieved** (scores, error rates, specific failure cases)
+- **Why it failed** or succeeded with concrete evidence
+- **Key insights** gained from each attempt
+
+### 3. Strategic Next Steps
+- **Hypotheses to test** based on current analysis
+- **Specific parameters to experiment** with ranges and rationale
+- **Phase-based approach** (isolate components, test boundaries, integrate)
+- **Success metrics** to measure progress
+
+### 4. Data-Driven Decisions
+- Reference **analysis scripts** like [one_day_analysis.py](mdc:analysis-scripts/one_day_analysis.py) and [multiday_analysis.py](mdc:analysis-scripts/multiday_analysis.py)
+- Include **specific failing test cases** with their patterns
+- Document **observed behaviors** from the data that inform algorithm changes
+
+### 5. Implementation Notes
+- Keep **pseudocode synchronized** with actual [run.sh](mdc:run.sh) implementation
+- Document **parameter choices** and their mathematical reasoning
+- Track **what doesn't work** to avoid repeating failed approaches
+
+## Never Make Blind Changes
+- Always analyze data patterns before adjusting parameters
+- Test hypotheses systematically, not randomly
+- Update the log BEFORE and AFTER each significant change
+- Maintain clear connection between analysis insights and implementation changes
+
+This ensures we build understanding progressively rather than just trial-and-error parameter tuning.

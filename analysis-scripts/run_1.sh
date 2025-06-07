@@ -16,4 +16,4 @@
 # echo "scale=2; $1 * 100 + $2 * 0.5 + $3" | bc
 
 # TODO: Replace this with your actual implementation
-python3 calculate_reimbursement.py "$1" "$2" "$3"
+python3 my-files/calculate_reimbursement.py "$1" "$2" "$3"
