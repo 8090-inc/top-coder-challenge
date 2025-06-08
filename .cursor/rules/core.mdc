@@ -1,0 +1,52 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Black Box Legacy Reimbursement System - Core Analysis Rules
+globs: ["*.py", "*.json", "*.md", "*.sh"]
+alwaysApply: true
+---
+
+# Black Box Legacy Reimbursement System - Project Rules
+
+## Project Context
+- Reverse-engineering a 60-year-old travel reimbursement system
+- Must analyze 1,000 historical input/output examples to discover business logic
+- Goal: Create perfect replica that matches legacy system behavior exactly
+- Performance requirement: <5 seconds per test case
+- No external dependencies allowed (no network calls, databases, etc.)
+
+## Input/Output Specification
+- Input: trip_duration_days (int), miles_traveled (int), total_receipts_amount (float)
+- Output: reimbursement_amount (float, rounded to 2 decimal places)
+- Files: public_cases.json, PRD.md, INTERVIEWS.md, run.sh.template, eval.sh
+
+## Implementation Strategy
+- Plan thoroughly first, get confirmation before coding
+- Start with comprehensive exploratory data analysis
+- Look for mathematical patterns, correlations, edge cases
+- Use statistical methods to identify formula components
+- Write tests first using subsets of known cases
+- Implement calculation logic incrementally
+- Validate continuously against eval.sh
+- Focus on discovering the EXACT legacy formula, not creating new one
+
+## File Structure Requirements
+- Keep run.sh simple and focused on performance
+- Separate calculation logic into reusable modules
+- Document discovered business rules clearly
+- Maintain analysis notebooks for exploration
+- Use clear, conventional naming
+
+## Success Criteria
+- Achieve >95% exact matches (±$0.01) before submission
+- All code must be complete and functional (no TODOs or placeholders)
+- Performance under 5 seconds per test case
+- Clean, readable, well-documented code
+
+@public_cases.json
+@PRD.md
+@INTERVIEWS.md
+@run.sh.template

@@ -1,0 +1,46 @@
+{
+  "dataset_size": 1000,
+  "trip_duration_range": [
+    1,
+    14
+  ],
+  "miles_range": [
+    5,
+    1317
+  ],
+  "receipts_range": [
+    1.42,
+    2503.46
+  ],
+  "reimbursement_range": [
+    117.24,
+    2337.73
+  ],
+  "correlations": {
+    "trip_duration_days": {
+      "trip_duration_days": 1.0,
+      "miles_traveled": 0.04604968208926667,
+      "total_receipts_amount": 0.132897428012951,
+      "reimbursement_amount": 0.5135091042475849
+    },
+    "miles_traveled": {
+      "trip_duration_days": 0.04604968208926667,
+      "miles_traveled": 1.0,
+      "total_receipts_amount": 0.13154790220259052,
+      "reimbursement_amount": 0.4316616850154993
+    },
+    "total_receipts_amount": {
+      "trip_duration_days": 0.132897428012951,
+      "miles_traveled": 0.13154790220259052,
+      "total_receipts_amount": 1.0,
+      "reimbursement_amount": 0.704034978994833
+    },
+    "reimbursement_amount": {
+      "trip_duration_days": 0.5135091042475849,
+      "miles_traveled": 0.4316616850154993,
+      "total_receipts_amount": 0.704034978994833,
+      "reimbursement_amount": 1.0
+    }
+  },
+  "five_day_bonus_confirmed": true
+}

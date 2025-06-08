@@ -1,0 +1,55 @@
+# Black Box Legacy Reimbursement System - Cursor Rules
+
+## Project Context
+- Reverse-engineering a 60-year-old travel reimbursement system
+- Must analyze 1,000 historical input/output examples to discover business logic
+- Goal: Create perfect replica that matches legacy system behavior
+- Performance requirement: <5 seconds per test case
+- No external dependencies allowed
+
+## Code Style & Approach
+- Use Python for data analysis and implementation
+- Prefer functional programming for calculation logic
+- Write pure functions with clear input/output
+- Use strict typing for all functions
+- Comments in English only
+- Follow DRY, KISS, and YAGNI principles
+
+## Data Analysis Requirements
+- Start with exploratory data analysis of public_cases.json
+- Look for patterns, correlations, edge cases
+- Use statistical analysis to identify formula components
+- Create visualizations to understand relationships
+- Test hypotheses systematically
+
+## Implementation Strategy
+- Plan thoroughly first, take confirmation of the plan
+- Write tests first based on public_cases.json samples
+- Implement calculation logic incrementally
+- Validate against known cases continuously
+- Focus on exact matches (±$0.01) over close matches
+
+## Testing Approach
+- Use subset of public_cases.json for unit tests
+- Test edge cases and boundary conditions
+- Validate performance requirements
+- Run eval.sh frequently to check progress
+- Aim for >95% exact matches before submission
+
+## File Structure Requirements
+- Keep run.sh simple and focused
+- Separate calculation logic into modules
+- Document discovered business rules clearly
+- Maintain analysis notebooks for exploration
+
+## Error Handling
+- Handle edge cases gracefully
+- Validate input parameters
+- Return proper numeric format (2 decimal places)
+- Log calculation steps for debugging
+
+## Performance Constraints
+- Optimize for speed (<5 seconds per case)
+- Avoid complex algorithms if simple ones work
+- Cache repeated calculations if needed
+- Profile code to identify bottlenecks
