@@ -1,0 +1,7 @@
+cluster_id,cluster_name,model_type,mae,formula,size
+0,Standard Multi-Day (5-12 days),linear,102.20672613319911,output = 57.80 + 46.69*days + 0.51*miles + 0.71*receipts,276
+1,Single Day High Miles,decision_tree,71.68163181818181,Decision tree with max_depth=3,50
+2,Long Trip High Receipts,decision_tree,101.27605462171198,Decision tree with max_depth=3,294
+3,Short Trip (3-5 days),decision_tree,88.65370315850889,Decision tree with max_depth=3,172
+4,Outlier (Low Receipt),rule,0.0,output = 365 (fixed),1
+5,Medium Trip High Miles (SPECIAL PROFILE),decision_tree,118.54039534965365,Decision tree with max_depth=3,207

@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.6",
+  "model_id": "practical_ensemble",
+  "version": "5.6",
+  "mae": 134.62527000000003,
+  "rmse": 185.23110763610953,
+  "bias": -64.91029,
+  "max_error": 615.69,
+  "exact_matches": 0,
+  "runtime": 15.39353084564209,
+  "cases_evaluated": 1000,
+  "error_p50": 94.46500000000003,
+  "error_p75": 187.7349999999999,
+  "error_p90": 306.21700000000004,
+  "error_p95": 418.72400000000005,
+  "timestamp": "2025-06-07T20:11:43.596093",
+  "description": "Fixed multiplier units detection"
+}

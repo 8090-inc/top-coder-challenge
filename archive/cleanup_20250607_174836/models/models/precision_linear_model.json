@@ -1,0 +1,20 @@
+{
+  "features": [
+    "trip_days",
+    "miles",
+    "receipts",
+    "trip_days_squared",
+    "miles_squared",
+    "receipts_squared"
+  ],
+  "coefficients": {
+    "trip_days": 89.25044893862102,
+    "miles": 0.3974367981385548,
+    "receipts": 1.1022898822235871,
+    "trip_days_squared": -2.8070061781658997,
+    "miles_squared": 1.8279963872046565e-05,
+    "receipts_squared": -0.000286689852242197
+  },
+  "intercept": -99.63817411222976,
+  "mae": 118.2633927830287
+}

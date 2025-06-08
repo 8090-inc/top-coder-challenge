@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.13",
+  "model_id": "practical_ensemble",
+  "version": "5.13",
+  "mae": 78.58166,
+  "rmse": 100.38348840421914,
+  "bias": -0.27530000000000177,
+  "max_error": 402.52000000000004,
+  "exact_matches": 2,
+  "runtime": 15.114185094833374,
+  "cases_evaluated": 1000,
+  "error_p50": 65.31999999999994,
+  "error_p75": 108.50000000000006,
+  "error_p90": 161.23799999999983,
+  "error_p95": 193.5265000000002,
+  "timestamp": "2025-06-07T20:17:10.362224",
+  "description": "Final improved model with minimal, proven enhancements"
+}

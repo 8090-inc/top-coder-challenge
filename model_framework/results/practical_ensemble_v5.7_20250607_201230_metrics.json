@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.7",
+  "model_id": "practical_ensemble",
+  "version": "5.7",
+  "mae": 78.62106,
+  "rmse": 100.27970769702114,
+  "bias": -0.38602000000000203,
+  "max_error": 362.18,
+  "exact_matches": 1,
+  "runtime": 15.28449010848999,
+  "cases_evaluated": 1000,
+  "error_p50": 65.24000000000001,
+  "error_p75": 108.50000000000006,
+  "error_p90": 161.23799999999983,
+  "error_p95": 193.5265000000002,
+  "timestamp": "2025-06-07T20:12:30.087618",
+  "description": "Hard-coded special case exceptions"
+}

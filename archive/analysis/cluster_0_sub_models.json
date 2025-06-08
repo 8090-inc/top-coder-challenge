@@ -1,0 +1,46 @@
+{
+  "sub_clusters": {
+    "0a_short": {
+      "intercept": 27.63428697404811,
+      "coef_days": 119.99407676338011,
+      "coef_miles": 0.3239844958427115,
+      "coef_receipts": 0.5275264694031749,
+      "n_samples": 157
+    },
+    "0b_low_efficiency": {
+      "intercept": 267.99920081464074,
+      "coef_days": 44.35393224504614,
+      "coef_miles": 0.5208708713144896,
+      "coef_receipts": 0.4676623117131867,
+      "n_samples": 181
+    },
+    "0c_long": {
+      "intercept": 184.08903185657118,
+      "coef_days": 64.21682599982832,
+      "coef_miles": 0.41083670432379493,
+      "coef_receipts": 0.404853612020133,
+      "n_samples": 119
+    },
+    "0d_high_receipt": {
+      "intercept": 1788.6567465628498,
+      "coef_days": -55.356341124020545,
+      "coef_miles": 0.2098500516685092,
+      "coef_receipts": 0.0640224342067753,
+      "n_samples": 27
+    },
+    "0e_standard": {
+      "intercept": 314.9781311623083,
+      "coef_days": 12.114975410419248,
+      "coef_miles": 0.504857297608439,
+      "coef_receipts": 0.7290659548562775,
+      "n_samples": 90
+    }
+  },
+  "assignment_rules": {
+    "0a_short": "trip_days between 2 and 4",
+    "0b_low_efficiency": "miles_per_day < 50 and trip_days >= 5",
+    "0c_long": "trip_days >= 9",
+    "0d_high_receipt": "receipts > 1500 and trip_days >= 5",
+    "0e_standard": "default (everything else)"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.14",
+  "model_id": "practical_ensemble",
+  "version": "5.14",
+  "mae": 78.68051999999999,
+  "rmse": 100.29735448554962,
+  "bias": -0.32662000000000146,
+  "max_error": 362.18,
+  "exact_matches": 0,
+  "runtime": 15.510855197906494,
+  "cases_evaluated": 1000,
+  "error_p50": 65.24000000000001,
+  "error_p75": 108.50000000000006,
+  "error_p90": 161.23799999999983,
+  "error_p95": 193.5265000000002,
+  "timestamp": "2025-06-07T20:20:08.013358",
+  "description": "Legacy-style penalty calculation (truncation + integer arithmetic)"
+}

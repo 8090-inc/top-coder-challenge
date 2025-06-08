@@ -1,0 +1,9 @@
+{
+  "winsorize_limit": 75,
+  "confidence_threshold": 35,
+  "weights": {
+    "ExtraTrees": 0.4,
+    "GBM": 0.35,
+    "RandomForest": 0.25
+  }
+}
