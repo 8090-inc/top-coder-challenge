@@ -12,16 +12,24 @@ import pandas as pd
 import numpy as np
 
 # Version tracking for our formula iterations
-FORMULA_VERSION = "v5.0_practical_ensemble"
+FORMULA_VERSION = "v5.13_final_improved"
 
-# Try to import v4 model, fall back to v3 if not available
+# Try to import v5.13 model first, then v5, fall back to v3 if not available
 try:
-    from models.v5_practical_ensemble import calculate_reimbursement_v5
-    USE_V5 = True
-    print("Using v5 practical ensemble model", file=sys.stderr)
-except Exception as e:
-    print(f"Warning: Could not load v5 model ({e}), using v3 inline implementation", file=sys.stderr)
+    from model_framework.models.final_v5_improved import V5_Final_ImprovedModel
+    v513_model = V5_Final_ImprovedModel()
+    USE_V513 = True
     USE_V5 = False
+    print("Using v5.13 final improved model (best)", file=sys.stderr)
+except Exception as e1:
+    USE_V513 = False
+    try:
+        from models.v5_practical_ensemble import calculate_reimbursement_v5
+        USE_V5 = True
+        print("Using v5 practical ensemble model", file=sys.stderr)
+    except Exception as e2:
+        print(f"Warning: Could not load v5.13 ({e1}) or v5 ({e2}), using v3 inline implementation", file=sys.stderr)
+        USE_V5 = False
 
 def calculate_reimbursement(trip_days, miles, receipts):
     """
@@ -35,8 +43,11 @@ def calculate_reimbursement(trip_days, miles, receipts):
     Returns:
         Calculated reimbursement amount
     """
-    # Use v4 if available
-    if USE_V5:
+    # Use v5.13 if available (best model)
+    if USE_V513:
+        return v513_model.predict(trip_days, miles, receipts)
+    # Use v5 if available
+    elif USE_V5:
         return calculate_reimbursement_v5(trip_days, miles, receipts)
     
     # Otherwise, use v3 inline implementation
@@ -202,7 +213,12 @@ def apply_receipt_ending_penalty(amount, receipts):
 def process_single(trip_days, miles, receipts):
     """Process a single reimbursement calculation"""
     result = calculate_reimbursement(trip_days, miles, receipts)
-    version = "v5.0_practical_ensemble" if USE_V5 else "v3.0_optimized"
+    if USE_V513:
+        version = "v5.13_final_improved"
+    elif USE_V5:
+        version = "v5.0_practical_ensemble"
+    else:
+        version = "v3.0_optimized"
     print(f"Formula Version: {version}")
     print(f"Inputs: {trip_days} days, {miles} miles, ${receipts:.2f} receipts")
     print(f"Expected Reimbursement: ${result:.2f}")
@@ -211,7 +227,12 @@ def process_single(trip_days, miles, receipts):
 def process_json_file(filepath):
     """Process all cases in a JSON file"""
     print(f"Processing file: {filepath}")
-    version = "v5.0_practical_ensemble" if USE_V5 else "v3.0_optimized"
+    if USE_V513:
+        version = "v5.13_final_improved"
+    elif USE_V5:
+        version = "v5.0_practical_ensemble"
+    else:
+        version = "v3.0_optimized"
     print(f"Formula Version: {version}")
     print("-" * 60)
     
@@ -261,7 +282,12 @@ def process_json_file(filepath):
         print(best.to_string(index=False))
         
         # Save full results
-        version_suffix = 'v5' if USE_V5 else 'v3'
+        if USE_V513:
+            version_suffix = 'v513'
+        elif USE_V5:
+            version_suffix = 'v5'
+        else:
+            version_suffix = 'v3'
         output_file = filepath.replace('.json', f'_predictions_{version_suffix}.csv')
         df.to_csv(output_file, index=False)
         print(f"\nFull results saved to: {output_file}")
@@ -280,7 +306,12 @@ def process_json_file(filepath):
         print(f"Average predicted reimbursement: ${df['predicted_reimbursement'].mean():.2f}")
         
         # Save results
-        version_suffix = 'v5' if USE_V5 else 'v3'
+        if USE_V513:
+            version_suffix = 'v513'
+        elif USE_V5:
+            version_suffix = 'v5'
+        else:
+            version_suffix = 'v3'
         output_file = filepath.replace('.json', f'_predictions_{version_suffix}.csv')
         df.to_csv(output_file, index=False)
         print(f"\nPredictions saved to: {output_file}")

@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.5",
+  "model_id": "practical_ensemble",
+  "version": "5.5",
+  "mae": 78.68032000000001,
+  "rmse": 100.2971884431463,
+  "bias": -0.32708000000000037,
+  "max_error": 362.18,
+  "exact_matches": 0,
+  "runtime": 15.38136911392212,
+  "cases_evaluated": 1000,
+  "error_p50": 65.24000000000001,
+  "error_p75": 108.50000000000006,
+  "error_p90": 161.23799999999983,
+  "error_p95": 193.5265000000002,
+  "timestamp": "2025-06-07T20:10:57.704277",
+  "description": "Integer cents arithmetic (COBOL style)"
+}

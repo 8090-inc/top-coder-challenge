@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.11",
+  "model_id": "practical_ensemble",
+  "version": "5.11",
+  "mae": 82.72913,
+  "rmse": 109.78778027221426,
+  "bias": 3.0679899999999987,
+  "max_error": 603.7300000000002,
+  "exact_matches": 1,
+  "runtime": 15.449536085128784,
+  "cases_evaluated": 1000,
+  "error_p50": 66.8900000000001,
+  "error_p75": 110.3775,
+  "error_p90": 172.3470000000001,
+  "error_p95": 208.78799999999998,
+  "timestamp": "2025-06-07T20:13:56.643757",
+  "description": "Direct error corrections for high-error case patterns"
+}

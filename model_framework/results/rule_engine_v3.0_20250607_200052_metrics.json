@@ -1,0 +1,18 @@
+{
+  "model_name": "rule_engine_v3.0",
+  "model_id": "rule_engine",
+  "version": "3.0",
+  "mae": 115.99010999999999,
+  "rmse": 146.21922885277434,
+  "bias": -18.311010000000003,
+  "max_error": 442.30999999999995,
+  "exact_matches": 2,
+  "runtime": 0.012067794799804688,
+  "cases_evaluated": 1000,
+  "error_p50": 99.69000000000005,
+  "error_p75": 166.9025,
+  "error_p90": 241.3780000000002,
+  "error_p95": 285.48949999999985,
+  "timestamp": "2025-06-07T20:00:52.602367",
+  "description": "V3 rule engine only"
+}

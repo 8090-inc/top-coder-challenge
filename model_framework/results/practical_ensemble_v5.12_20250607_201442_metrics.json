@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.12",
+  "model_id": "practical_ensemble",
+  "version": "5.12",
+  "mae": 79.70163000000001,
+  "rmse": 104.34760242621772,
+  "bias": -1.46727,
+  "max_error": 568.5700000000002,
+  "exact_matches": 2,
+  "runtime": 15.378743171691895,
+  "cases_evaluated": 1000,
+  "error_p50": 65.24000000000001,
+  "error_p75": 108.50000000000006,
+  "error_p90": 161.23799999999983,
+  "error_p95": 194.64149999999998,
+  "timestamp": "2025-06-07T20:14:42.719098",
+  "description": "Hybrid model with best elements from all experiments"
+}

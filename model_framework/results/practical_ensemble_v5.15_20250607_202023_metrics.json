@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.15",
+  "model_id": "practical_ensemble",
+  "version": "5.15",
+  "mae": 85.70410999999999,
+  "rmse": 117.49052250415775,
+  "bias": -8.51299,
+  "max_error": 684.29,
+  "exact_matches": 0,
+  "runtime": 15.346102952957153,
+  "cases_evaluated": 1000,
+  "error_p50": 67.43000000000006,
+  "error_p75": 111.46250000000009,
+  "error_p90": 175.96200000000005,
+  "error_p95": 233.03799999999995,
+  "timestamp": "2025-06-07T20:20:23.363468",
+  "description": "Pure integer cents arithmetic for penalty calculation"
+}

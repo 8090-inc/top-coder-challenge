@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.8",
+  "model_id": "practical_ensemble",
+  "version": "5.8",
+  "mae": 89.45706,
+  "rmse": 111.95480358519683,
+  "bias": 14.901860000000001,
+  "max_error": 460.90999999999985,
+  "exact_matches": 1,
+  "runtime": 15.41913390159607,
+  "cases_evaluated": 1000,
+  "error_p50": 79.1350000000001,
+  "error_p75": 123.38999999999996,
+  "error_p90": 176.253,
+  "error_p95": 215.82450000000014,
+  "timestamp": "2025-06-07T20:13:16.582929",
+  "description": "Combined truncation + cents hash + step functions"
+}

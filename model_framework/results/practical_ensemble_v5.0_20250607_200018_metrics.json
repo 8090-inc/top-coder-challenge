@@ -1,0 +1,9 @@
+{
+  "model_name": "practical_ensemble_v5.0",
+  "model_id": "practical_ensemble",
+  "version": "5.0",
+  "mae": 78.6805,
+  "rmse": 100.297322443822,
+  "bias": -0.32658000000000154,
+  "max_error": 362.18,
+  "exact_matches": 

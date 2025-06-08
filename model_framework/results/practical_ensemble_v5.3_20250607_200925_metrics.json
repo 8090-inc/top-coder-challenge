@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.3",
+  "model_id": "practical_ensemble",
+  "version": "5.3",
+  "mae": 80.84737,
+  "rmse": 104.40968233789431,
+  "bias": -2.771670000000001,
+  "max_error": 499.41999999999985,
+  "exact_matches": 0,
+  "runtime": 15.139805793762207,
+  "cases_evaluated": 1000,
+  "error_p50": 66.8900000000001,
+  "error_p75": 109.8725,
+  "error_p90": 169.02300000000005,
+  "error_p95": 198.68999999999983,
+  "timestamp": "2025-06-07T20:09:25.357295",
+  "description": "Cents-based hashing for rule switches"
+}

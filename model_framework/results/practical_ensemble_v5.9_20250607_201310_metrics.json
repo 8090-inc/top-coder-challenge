@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.9",
+  "model_id": "practical_ensemble",
+  "version": "5.9",
+  "mae": 85.39295,
+  "rmse": 110.19749946300959,
+  "bias": 1.5308699999999975,
+  "max_error": 515.8300000000002,
+  "exact_matches": 2,
+  "runtime": 15.47337818145752,
+  "cases_evaluated": 1000,
+  "error_p50": 71.75999999999993,
+  "error_p75": 115.38999999999993,
+  "error_p90": 177.69800000000006,
+  "error_p95": 215.69549999999984,
+  "timestamp": "2025-06-07T20:13:10.939743",
+  "description": "Targeted fixes for specific high-error patterns"
+}

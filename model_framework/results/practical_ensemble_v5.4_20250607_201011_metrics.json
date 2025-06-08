@@ -1,0 +1,18 @@
+{
+  "model_name": "practical_ensemble_v5.4",
+  "model_id": "practical_ensemble",
+  "version": "5.4",
+  "mae": 104.02752000000001,
+  "rmse": 126.40977766533727,
+  "bias": 51.59842,
+  "max_error": 408.02,
+  "exact_matches": 0,
+  "runtime": 15.403047800064087,
+  "cases_evaluated": 1000,
+  "error_p50": 92.96000000000004,
+  "error_p75": 150.04250000000002,
+  "error_p90": 199.53600000000006,
+  "error_p95": 234.32650000000004,
+  "timestamp": "2025-06-07T20:10:11.343214",
+  "description": "Step function logic for receipts and miles"
+}
